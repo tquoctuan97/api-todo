@@ -13,7 +13,7 @@ Todo.prototype.cleanUp = function () {
     this.data.text = ''
   }
   if (typeof this.data.complete != 'boolean') {
-    this.data.complete = undefined
+    this.data.complete = ''
   }
   if (typeof this.data.author != 'string') {
     this.data.author = ''
@@ -22,7 +22,7 @@ Todo.prototype.cleanUp = function () {
   // get rid of any bogus properties
   this.data = {
     text: sanitizeHTML(this.data.text.trim(), { allowedTags: [], allowedAttributes: {} }),
-    complete: Boolean(this.data.complete),
+    complete: this.data.complete,
     author: sanitizeHTML(this.data.author.trim(), { allowedTags: [], allowedAttributes: {} }),
     createdDate: new Date()
   }
@@ -32,8 +32,8 @@ Todo.prototype.validate = function () {
   if (this.data.text === '') {
     this.errors.push('You must provide todo content')
   }
-  if (this.data.complete === undefined) {
-    this.errors.push('You must provide a status of todo.')
+  if (this.data.complete === '') {
+    this.errors.push('You must provide a status complete of todo.')
   }
   if (this.data.author === '') {
     this.errors.push('You must provide an author of todo ')
